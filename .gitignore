@@ -55,3 +55,10 @@ target/
 
 # PyCharm
 .idea/
+
+# Game Assets
+KDREAMS.CFG
+KDREAMS.MAP
+KDREAMS.CMP
+KDREAMS.EGA
+KDREAMS.AUD

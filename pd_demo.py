@@ -12,10 +12,11 @@ import sfml as sf
 class PDDemo():
     def __init__(self):
         # Constants
-        self.game_size = sf.Vector2(320, 200)  # TODO: Make this variable
+        window_size = sf.Vector2(640, 400)  # TODO: Make these variable
+        self.game_size = sf.Vector2(320, 200)
 
         # Init window
-        w, h = self.game_size
+        w, h = window_size
         self.window = sf.RenderWindow(sf.VideoMode(w, h), "PyDreams 0.1")
         self.window.vertical_synchronization = True
 
