@@ -6,33 +6,39 @@ pd_demo.py: Initializes the demo and handles the demo loop
 
 import sys
 
-import sfml as sf
+import sdl2
+import sdl2.ext as sdl
 
 
 class PDDemo():
     def __init__(self):
         # Constants
-        window_size = sf.Vector2(640, 400)  # TODO: Make these variable
-        self.game_size = sf.Vector2(320, 200)
+        window_size = (640, 400)  # TODO: Make these variable
+        self.game_size = (320, 200)
 
         # Init window
-        w, h = window_size
-        self.window = sf.RenderWindow(sf.VideoMode(w, h), "PyDreams 0.1")
-        self.window.vertical_synchronization = True
+        sdl.init()
+        self.window = sdl.Window("PyDreams 0.1", size=window_size)
+        self.window.show()
+
+        # Running?
+        self.running = True
 
         # TODO: Init/load sounds
 
     def loop(self):
         # Demo loop
-        while self.window.is_open:
+        while self.running:
             # Events
-            for event in self.window.events:
-                if type(event) is sf.CloseEvent:
-                    self.window.close()
+            for event in sdl.get_events():
+                if event.type == sdl2.SDL_QUIT:
+                    self.running = False
+                    break
 
-                if type(event) is sf.KeyEvent and event.pressed and event.code is sf.Keyboard.ESCAPE:
-                    self.window.close()
+                if event.type == sdl2.SDL_KEYDOWN and event.key.keysym.sym == sdl2.SDLK_ESCAPE:
+                    self.running = False
+                    break
 
-            self.window.clear(sf.Color(0, 0, 0))
-            self.window.display()
+            sdl.fill(self.window.get_surface(), sdl.Color(0, 0, 0))
+            self.window.refresh()
         sys.exit(0)
